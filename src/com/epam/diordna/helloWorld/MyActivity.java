@@ -1,6 +1,7 @@
 package com.epam.diordna.helloWorld;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +16,9 @@ public class MyActivity extends Activity {
 
         Button calculateButton = (Button) findViewById(R.id.calculate);
         calculateButton.setOnClickListener(calculateOnClick);
+
+        Button toSecondActivityButton = (Button) findViewById(R.id.toSecondActivity);
+        toSecondActivityButton.setOnClickListener(toSecondActivityOnClick);
     }
 
     private View.OnClickListener calculateOnClick = new View.OnClickListener() {
@@ -27,6 +31,17 @@ public class MyActivity extends Activity {
             int resultValue = number1Value + number2Value;
             TextView result = (TextView) findViewById(R.id.result);
             result.setText(Integer.toString(resultValue));
+        }
+    };
+
+    private View.OnClickListener toSecondActivityOnClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            TextView result = (TextView) findViewById(R.id.result);
+            String resultValue = result.getText().toString();
+            Intent intent = new Intent(getApplicationContext(), SecondActivity.class);
+            intent.putExtra("result", resultValue);
+            startActivity(intent);
         }
     };
 }
